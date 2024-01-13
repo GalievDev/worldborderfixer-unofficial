@@ -3,6 +3,15 @@
   "minVersion": "0.8.3",
   "package": "dev.galiev.worldborderfixer.mixin",
   "mixins": [
-
+    "ClientboundInitializeBorderPacketMixin",
+    "ClientboundSetBorderCenterPacketMixin",
+    "LevelMixin",
+    "MinecraftServerMixin",
+    "ServerLevelMixin",
+    "WorldBorderCommandMixin",
+    "WorldBorderMixin"
+  ],
+  "client": [
+    "PlayerListMixin"
   ]
 }
