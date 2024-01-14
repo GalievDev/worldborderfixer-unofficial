@@ -4,6 +4,7 @@ import dev.galiev.worldborderfixer.BorderWithWorld;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.storage.WritableLevelData;
@@ -33,9 +34,9 @@ public abstract class LevelMixin {
 
     @Inject(
             method = "<init>",
-            at = @At(value = "INVOKE", target = "Ljava/lang/Thread;currentThread()Ljava/lang/Thread;")
+            at = @At(value = "TAIL", target = "Ljava/lang/Thread;currentThread()Ljava/lang/Thread;")
     )
-    private void setWorldBorder(WritableLevelData pLevelData, ResourceKey pDimension, RegistryAccess pRegistryAccess, Holder pDimensionTypeRegistration, Supplier pProfiler, boolean pIsClientSide, boolean pIsDebug, long pBiomeZoomSeed, int pMaxChainedNeighborUpdates, CallbackInfo ci) {
+    private void setWorldBorder(WritableLevelData pLevelData, ResourceKey<Level> pDimension, RegistryAccess pRegistryAccess, Holder<DimensionType> pDimensionTypeRegistration, Supplier<ProfilerFiller> pProfiler, boolean pIsClientSide, boolean pIsDebug, long pBiomeZoomSeed, int pMaxChainedNeighborUpdates, CallbackInfo ci) {
         Level level = (Level) (Object) this;
         ((BorderWithWorld) level.getWorldBorder()).setLevel(level);
     }
