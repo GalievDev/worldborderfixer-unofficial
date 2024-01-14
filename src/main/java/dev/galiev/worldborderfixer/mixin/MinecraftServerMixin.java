@@ -30,7 +30,7 @@ public abstract class MinecraftServerMixin {
         levels.forEach((registryKey, world) -> {
             WorldBorder worldBorder = world.getWorldBorder();
 
-            if (registryKey.registry() != Level.OVERWORLD.registry()) {
+            if (registryKey.getRegistryName() != Level.OVERWORLD.getRegistryName()) {
                 WorldBorderState worldBorderState = world.getDataStorage().computeIfAbsent(WorldBorderState::fromNbt, WorldBorderState::new,"worldBorder");
 
                 worldBorder.setCenter(worldBorderState.getCenterX(), worldBorderState.getCenterZ());
