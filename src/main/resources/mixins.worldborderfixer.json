@@ -2,6 +2,7 @@
   "required": true,
   "minVersion": "0.8.3",
   "package": "dev.galiev.worldborderfixer.mixin",
+  "refmap": "mixins.worldborderfixer.refmap.json",
   "mixins": [
     "ClientboundInitializeBorderPacketMixin",
     "ClientboundSetBorderCenterPacketMixin",
@@ -9,9 +10,7 @@
     "MinecraftServerMixin",
     "ServerLevelMixin",
     "WorldBorderCommandMixin",
-    "WorldBorderMixin"
-  ],
-  "client": [
+    "WorldBorderMixin",
     "PlayerListMixin"
   ]
 }
