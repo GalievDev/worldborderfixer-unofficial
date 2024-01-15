@@ -20,8 +20,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Map;
 
-import static com.mojang.text2speech.Narrator.LOGGER;
-
 @Mixin(MinecraftServer.class)
 public abstract class MinecraftServerMixin {
 
@@ -29,7 +27,6 @@ public abstract class MinecraftServerMixin {
 
     @Inject(method = "createLevels", at = @At(value = "TAIL"))
     private void loadOtherBorder(ChunkProgressListener pListener, CallbackInfo ci) {
-        LOGGER.info("load other border");
         levels.forEach((registryKey, world) -> {
             WorldBorder worldBorder = world.getWorldBorder();
 

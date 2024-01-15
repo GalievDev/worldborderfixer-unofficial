@@ -8,8 +8,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import static com.mojang.text2speech.Narrator.LOGGER;
-
 @Mixin(ClientboundInitializeBorderPacket.class)
 public abstract class ClientboundInitializeBorderPacketMixin {
     @Redirect(
@@ -18,7 +16,7 @@ public abstract class ClientboundInitializeBorderPacketMixin {
     )
     private double scaleCenterX(WorldBorder worldBorder) {
         Level level = ((BorderWithWorld) worldBorder).getLevel();
-        LOGGER.info("scale center x");
+
         final double centerX = worldBorder.getCenterX();
         return level == null || level.isClientSide ? centerX : centerX * level.dimensionType().coordinateScale();
     }
@@ -29,7 +27,7 @@ public abstract class ClientboundInitializeBorderPacketMixin {
     )
     private double scaleCenterZ(WorldBorder worldBorder) {
         Level level = ((BorderWithWorld) worldBorder).getLevel();
-        LOGGER.info("scale center z");
+
         final double centerZ = worldBorder.getCenterZ();
         return level == null || level.isClientSide ? centerZ : centerZ * level.dimensionType().coordinateScale();
     }

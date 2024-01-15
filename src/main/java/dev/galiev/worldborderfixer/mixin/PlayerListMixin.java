@@ -20,7 +20,6 @@ public abstract class PlayerListMixin {
             at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/server/level/ServerLevel;getWorldBorder()Lnet/minecraft/world/level/border/WorldBorder;")
     )
     private WorldBorder getPlayerWorldBorder(WorldBorder worldBorder, ServerPlayer player, ServerLevel level) {
-        LOGGER.info("Player border");
         return level.getWorldBorder();
     }
 }
