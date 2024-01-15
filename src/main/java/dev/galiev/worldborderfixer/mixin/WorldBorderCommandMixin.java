@@ -8,6 +8,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
+import static com.mojang.text2speech.Narrator.LOGGER;
+
 @Mixin(WorldBorderCommand.class)
 public abstract class WorldBorderCommandMixin {
     @Redirect(
@@ -15,6 +17,7 @@ public abstract class WorldBorderCommandMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;getWorldBorder()Lnet/minecraft/world/level/border/WorldBorder;")
     )
     private static WorldBorder test(ServerLevel instance, CommandSourceStack sourceStack) {
+        LOGGER.info("test");
         return sourceStack.getLevel().getWorldBorder();
     }
 }

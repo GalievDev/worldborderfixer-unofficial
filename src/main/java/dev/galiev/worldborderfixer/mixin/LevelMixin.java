@@ -16,6 +16,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.function.Supplier;
 
+import static com.mojang.text2speech.Narrator.LOGGER;
+
 @Mixin(Level.class)
 public abstract class LevelMixin {
 
@@ -23,6 +25,7 @@ public abstract class LevelMixin {
 
     @Redirect(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/dimension/DimensionType;coordinateScale()D"))
     private double setBorderCoordinateScale(DimensionType dimensionType) {
+        LOGGER.info("set border coordinate scale");
         if (this.isClientSide) {
             return dimensionType.coordinateScale();
         } else {
@@ -36,6 +39,7 @@ public abstract class LevelMixin {
     )
     private void setWorldBorder(WritableLevelData pLevelData, ResourceKey pDimension, Holder pDimensionTypeRegistration, Supplier pProfiler, boolean pIsClientSide, boolean pIsDebug, long pBiomeZoomSeed, int pMaxChainedNeighborUpdates, CallbackInfo ci) {
         Level level = (Level) (Object) this;
+        LOGGER.info("set world border");
         ((BorderWithWorld) level.getWorldBorder()).setLevel(level);
     }
 }
