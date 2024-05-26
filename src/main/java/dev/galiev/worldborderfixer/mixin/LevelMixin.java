@@ -32,6 +32,7 @@ public abstract class LevelMixin {
         }
     }
 
+    @SuppressWarnings("UnreachableCode")
     @Inject(
             method = "<init>",
             at = @At(value = "TAIL", target = "Ljava/lang/Thread;currentThread()Ljava/lang/Thread;")

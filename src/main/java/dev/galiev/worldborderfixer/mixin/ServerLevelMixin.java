@@ -9,11 +9,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ServerLevel.class)
 public abstract class ServerLevelMixin {
+    @SuppressWarnings("UnreachableCode")
     @Inject(method = "saveLevelData", at = @At("HEAD"))
     private void saveBorder(CallbackInfo ci) {
         ServerLevel level = (ServerLevel) (Object) this;
-        WorldBorderState worldBorderState = level.getDataStorage().computeIfAbsent(WorldBorderState::fromNbt, WorldBorderState::new,"worldBorder");
-
+        WorldBorderState worldBorderState = level.getChunkSource().getDataStorage().computeIfAbsent(WorldBorderState::fromNbt, WorldBorderState::new,"worldBorder");
         worldBorderState.fromBorder(level.getWorldBorder());
     }
 }
