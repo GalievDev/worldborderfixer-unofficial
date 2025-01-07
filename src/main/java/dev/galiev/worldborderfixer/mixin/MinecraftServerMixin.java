@@ -2,6 +2,7 @@ package dev.galiev.worldborderfixer.mixin;
 
 import dev.galiev.worldborderfixer.PerWorldBorderListener;
 import dev.galiev.worldborderfixer.WorldBorderState;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -10,6 +11,7 @@ import net.minecraft.server.players.PlayerList;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.border.BorderChangeListener;
 import net.minecraft.world.level.border.WorldBorder;
+import net.minecraft.world.level.saveddata.SavedData;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,7 +33,7 @@ public abstract class MinecraftServerMixin {
             WorldBorder worldBorder = world.getWorldBorder();
 
             if (registryKey.location() != Level.OVERWORLD.location()) {
-                WorldBorderState worldBorderState = world.getDataStorage().computeIfAbsent(WorldBorderState::fromNbt, WorldBorderState::new,"worldBorder");
+                WorldBorderState worldBorderState = world.getDataStorage().computeIfAbsent(new SavedData.Factory<>(WorldBorderState::new, WorldBorderState::fromNbt),"worldBorder");
 
                 worldBorder.setCenter(worldBorderState.getCenterX(), worldBorderState.getCenterZ());
                 worldBorder.setSize(worldBorderState.getSize());

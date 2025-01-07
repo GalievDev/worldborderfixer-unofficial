@@ -1,8 +1,8 @@
 {
   "required": true,
-  "minVersion": "0.8.3",
+  "minVersion": "0.8",
   "package": "dev.galiev.worldborderfixer.mixin",
-  "refmap": "mixins.worldborderfixer.refmap.json",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
     "ClientboundInitializeBorderPacketMixin",
     "ClientboundSetBorderCenterPacketMixin",
@@ -12,5 +12,8 @@
     "WorldBorderCommandMixin",
     "WorldBorderMixin",
     "PlayerListMixin"
-  ]
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }

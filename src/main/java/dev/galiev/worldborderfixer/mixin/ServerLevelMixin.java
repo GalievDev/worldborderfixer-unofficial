@@ -2,6 +2,7 @@ package dev.galiev.worldborderfixer.mixin;
 
 import dev.galiev.worldborderfixer.WorldBorderState;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.saveddata.SavedData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -13,7 +14,7 @@ public abstract class ServerLevelMixin {
     @Inject(method = "saveLevelData", at = @At("HEAD"))
     private void saveBorder(CallbackInfo ci) {
         ServerLevel level = (ServerLevel) (Object) this;
-        WorldBorderState worldBorderState = level.getChunkSource().getDataStorage().computeIfAbsent(WorldBorderState::fromNbt, WorldBorderState::new,"worldBorder");
+        WorldBorderState worldBorderState = level.getChunkSource().getDataStorage().computeIfAbsent(new SavedData.Factory<>(WorldBorderState::new, WorldBorderState::fromNbt), "worldBorder");
         worldBorderState.fromBorder(level.getWorldBorder());
     }
 }
